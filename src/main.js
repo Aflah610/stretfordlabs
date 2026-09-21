@@ -12,11 +12,14 @@ import contactArt from './assets/contact-art.webp'
 const WHATSAPP_NUMBER = '919292016359'
 const whatsapp = (message) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 const INSTAGRAM_URL = 'https://www.instagram.com/stretford_labs/'
+const INSTAGRAM_HANDLE = '@stretford_labs'
+const WHATSAPP_DISPLAY = '+91 92920 16359'
 const LINKEDIN_URL = '' // not supplied yet: the item renders without a link until this is set
 const EMAIL = 'stretfordlabs@gmail.com'
 
 const icons = {
   instagram: `<svg viewBox="0 0 48 48" aria-hidden="true"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285aeb"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#ig)"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3.4"/><circle cx="24" cy="24" r="6.4" fill="none" stroke="#fff" stroke-width="3.4"/><circle cx="31.6" cy="16.4" r="2" fill="#fff"/></svg>`,
+  whatsapp: `<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4C13 4 4 12.9 4 23.9c0 3.5.9 6.9 2.7 9.9L4 44l10.5-2.7c2.9 1.6 6.1 2.4 9.5 2.4 11 0 20-8.9 20-19.9S35 4 24 4z" fill="#25d366"/><path d="M34.6 29.4c-.6-.3-3.4-1.7-3.9-1.9-.5-.2-.9-.3-1.3.3-.4.6-1.5 1.9-1.8 2.2-.3.4-.7.4-1.3.1-.6-.3-2.5-.9-4.7-2.9-1.7-1.5-2.9-3.4-3.2-4-.3-.6 0-.9.3-1.2.3-.3.6-.7.9-1.1.3-.4.4-.6.6-1 .2-.4.1-.8 0-1.1-.1-.3-1.3-3.1-1.8-4.3-.5-1.1-.9-1-1.3-1h-1.1c-.4 0-1 .1-1.5.7-.5.6-2 1.9-2 4.7s2 5.5 2.3 5.9c.3.4 4 6.1 9.7 8.5 1.4.6 2.4.9 3.2 1.2 1.4.4 2.6.4 3.6.2 1.1-.2 3.4-1.4 3.9-2.7.5-1.3.5-2.5.3-2.7-.1-.3-.5-.4-1.1-.7z" fill="#fff"/></svg>`,
   linkedin: `<svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="8" fill="#0a66c2"/><rect x="10" y="19" width="6" height="19" fill="#fff"/><circle cx="13" cy="12.6" r="3.6" fill="#fff"/><path d="M21 19h5.7v2.7c.9-1.6 2.9-3.2 6-3.2 5.6 0 6.6 3.7 6.6 8.4V38h-6V28.2c0-2.4-.1-4.6-2.9-4.6-2.9 0-3.4 2.2-3.4 4.4V38h-6z" fill="#fff"/></svg>`,
   gmail: `<svg viewBox="0 0 48 36" aria-hidden="true"><path d="M3.3 36h7.6V17.5L0 9.4v23.3C0 34.5 1.5 36 3.3 36z" fill="#4285f4"/><path d="M37.1 36h7.6c1.8 0 3.3-1.5 3.3-3.3V9.4l-10.9 8.1z" fill="#34a853"/><path d="M37.1 3.4v14.1L48 9.4V5c0-4.1-4.7-6.4-7.9-4z" fill="#fbbc04"/><path d="M10.9 17.5V3.4L24 13.2l13.1-9.8v14.1L24 27.3z" fill="#ea4335"/><path d="M0 5v4.4l10.9 8.1V3.4L7.9 1C4.7-1.4 0 .9 0 5z" fill="#c5221f"/></svg>`,
 }
@@ -225,6 +228,17 @@ document.querySelector('#app').innerHTML = `
       </footer>
     </section>
   </div>
+
+  <nav class="dock" aria-label="Quick contact">
+    <a class="dock-item" href="${INSTAGRAM_URL}" target="_blank" rel="noopener noreferrer">
+      <span class="dock-icon">${icons.instagram.replaceAll('"ig"', '"ig-dock"').replace('url(#ig)', 'url(#ig-dock)')}</span>
+      <span class="dock-text"><strong>Follow Us</strong><small>${INSTAGRAM_HANDLE}</small></span>
+    </a>
+    <a class="dock-item" href="${whatsapp("Hi Stretford Labs, I'd like to know more.")}" target="_blank" rel="noopener noreferrer">
+      <span class="dock-icon">${icons.whatsapp}</span>
+      <span class="dock-text"><strong>Chat With Us</strong><small>${WHATSAPP_DISPLAY}</small></span>
+    </a>
+  </nav>
 `
 
 // On landscape desktops every section fills exactly one screen: each is laid out on a canvas at its

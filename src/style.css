@@ -690,6 +690,44 @@ h1 em { color: var(--yellow); font-style: normal; font-weight: 700; }
   .foot-dash { width: 28px; }
 }
 
+/* ---------------- quick-contact dock (phones and tablets) ----------------
+   a floating Instagram / WhatsApp bar pinned to the bottom of the screen, like mindlap.in */
+.dock { display: none; }
+@media (max-width: 900px) {
+  .page-shell { padding-bottom: 88px; }
+  .dock {
+    position: fixed;
+    z-index: 20;
+    left: 12px;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 560px;
+    margin-inline: auto;
+    padding: 10px 6px;
+    border: 1px solid rgba(0, 0, 0, .06);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 10px 30px rgba(20, 16, 10, .14);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+  .dock-item { display: flex; align-items: center; justify-content: center; gap: 10px; min-width: 0; padding: 2px 8px; }
+  .dock-item + .dock-item { border-left: 1px solid #e6e4e8; }
+  .dock-icon { flex: 0 0 auto; width: 34px; height: 34px; }
+  .dock-icon svg { display: block; width: 100%; height: 100%; }
+  .dock-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+  .dock-text strong { font-size: 15px; font-weight: 700; color: #111; white-space: nowrap; }
+  .dock-text small { margin-top: 2px; font-size: 12.5px; color: #5f5d66; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dock-item:active { opacity: .7; }
+}
+@media (max-width: 360px) {
+  .dock-icon { width: 30px; height: 30px; }
+  .dock-text strong { font-size: 14px; }
+  .dock-text small { font-size: 11.5px; }
+}
+
 /* ---------------- fit-to-screen (desktop) ----------------
    main.js adds .fit on landscape desktops and gives each section a zoom plus its canvas size
    (--cw x --ch, in design px). Each section is laid out at its comp's scale and zoomed so it
