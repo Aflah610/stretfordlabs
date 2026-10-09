@@ -1,9 +1,5 @@
 import './style.css'
 import heroImage from './assets/heropic-clean.webp'
-import iconWebDesign from './assets/icon-web-design.webp'
-import iconFrontend from './assets/icon-frontend.webp'
-import iconLanding from './assets/icon-landing.webp'
-import iconUiux from './assets/icon-uiux.webp'
 import artMindlap from './assets/work-mindlap.webp'
 import artStretford from './assets/work-stretford.webp'
 import aboutArt from './assets/about-art.webp'
@@ -37,27 +33,113 @@ const contactItems = contactLinks.map(({ icon, label, href }) => {
             <li>${href ? `<a href="${href}"${external}>${inner}</a>` : `<span>${inner}</span>`}</li>`
 }).join('')
 
+// stroke icons drawn on a 24px grid (card badges, arrow and the small glyphs inside the card mock-ups)
+const svg = (paths) => `<svg viewBox="0 0 24 24" aria-hidden="true">${paths}</svg>`
+const glyph = {
+  users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+  code: '<path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/>',
+  network: '<rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3M12 12V8"/>',
+  gear: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  home: '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-6h6v6"/>',
+  lead: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>',
+  contact: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M7 18a5 5 0 0 1 10 0"/>',
+  building: '<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M10 21v-4h4v4"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+  chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  pen: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+  crm: '<circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/>',
+  check: '<path d="m7 12.5 3.2 3.2L17 9"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  card: '<rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4"/><circle cx="17" cy="15" r="1.4"/>',
+}
+
+// small UI mock-ups at the foot of each service card
+const crmVisual = `
+            <div class="cv-crm">
+              <div class="cv-side">
+                <div class="cv-brand">${svg(glyph.crm)}CRM</div>
+                <ul>
+                  <li>${svg(glyph.home)}Home</li>
+                  <li class="is-on">${svg(glyph.lead)}Leads</li>
+                  <li>${svg(glyph.contact)}Contacts</li>
+                  <li>${svg(glyph.building)}Accounts</li>
+                </ul>
+              </div>
+              <div class="cv-main">
+                <div class="cv-title">Leads</div>
+                <div class="cv-tabs"><b>All Leads</b><span>New</span><span>Contacted</span></div>
+                <div class="cv-row">${svg(glyph.user)}<span><b>James Carter</b><small>Bright Solutions</small></span><em class="tag-new">New</em></div>
+                <div class="cv-row">${svg(glyph.user)}<span><b>Priya Nair</b><small>GreenTech</small></span><em class="tag-done">Contacted</em></div>
+              </div>
+            </div>`
+
+const codeVisual = `
+            <pre class="cv-code"><code><i>// Deluge Script</i>
+<b>if</b> (lead.Source == <s>"Website"</s>) {
+  lead.Status = <s>"New"</s>;
+  lead.Owner = <s>"Sales Team"</s>;
+  lead.update();
+}</code></pre>`
+
+const hubVisual = `
+            <div class="cv-hub">
+              <svg class="cv-links" viewBox="0 0 300 170" aria-hidden="true"><path d="M86 48 116 70M86 124l30-22M214 48l-30 22M214 124l-30-22" /></svg>
+              <span class="cv-app cv-wa">${icons.whatsapp}</span>
+              <span class="cv-app cv-web">${svg(glyph.globe)}</span>
+              <span class="cv-app cv-pay">${svg(glyph.card)}</span>
+              <span class="cv-app cv-chat"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.5" y="2" width="3.4" height="9.5" rx="1.7" fill="#36c5f0"/><rect x="2" y="11.1" width="9.5" height="3.4" rx="1.7" fill="#2eb67d"/><rect x="11.1" y="12.5" width="3.4" height="9.5" rx="1.7" fill="#ecb22e"/><rect x="12.5" y="9.5" width="9.5" height="3.4" rx="1.7" fill="#e01e5a"/></svg></span>
+              <span class="cv-zoho">
+                <span class="cv-zoho-mark"><i style="--c:#e42527"></i><i style="--c:#089949"></i><i style="--c:#226db4"></i><i style="--c:#f9b21d"></i></span>
+                <small>ZOHO</small>
+              </span>
+            </div>`
+
+const oneVisual = `
+            <div class="cv-one">
+              <ul class="cv-apps">
+                <li class="is-on">${svg(glyph.grid)}Zoho One</li>
+                <li>${svg(glyph.chart)}Analytics</li>
+                <li>${svg(glyph.pen)}Creator</li>
+                <li>${svg(glyph.crm)}CRM</li>
+              </ul>
+              <ul class="cv-checks">
+                <li>${svg(glyph.check)}Setup</li>
+                <li>${svg(glyph.check)}Customization</li>
+                <li>${svg(glyph.check)}Training</li>
+                <li>${svg(glyph.check)}Ongoing support</li>
+              </ul>
+            </div>`
+
 const services = [
   {
-    art: iconWebDesign,
+    kind: 'crm',
+    icon: glyph.users,
     title: 'Zoho CRM Setup',
-    copy: 'Modules, layouts, blueprints and workflows shaped around how you sell.',
+    copy: 'Modules, pipelines, layouts and automations tailored to how you actually sell.',
+    visual: crmVisual,
   },
   {
-    art: iconFrontend,
-    title: 'Zoho Creator Apps',
-    copy: 'Custom low-code apps and Deluge scripts for processes no off-the-shelf tool fits.',
-    featured: true,
+    kind: 'apps',
+    icon: glyph.code,
+    title: 'Custom Zoho Apps',
+    copy: 'Build custom modules, layouts and Deluge scripts for processes that don&rsquo;t fit off-the-shelf.',
+    visual: codeVisual,
   },
   {
-    art: iconLanding,
+    kind: 'apis',
+    icon: glyph.network,
     title: 'Integrations &amp; APIs',
-    copy: 'Connect Zoho to payments, WhatsApp, your website and the tools you already use.',
+    copy: 'Connect Zoho with your website, WhatsApp, payment gateways and the tools you already use.',
+    visual: hubVisual,
   },
   {
-    art: iconUiux,
+    kind: 'one',
+    icon: glyph.gear,
     title: 'Zoho One Consulting',
-    copy: 'Implementation, data migration and audits to get the most out of Zoho One.',
+    copy: 'Implementation, customization, data migration and ongoing support to get the most out of Zoho One.',
+    visual: oneVisual,
   },
 ]
 
@@ -111,11 +193,17 @@ const stepItems = steps.map((s, i) => `
             </div>
           </li>`).join('')
 
-const cards = services.map((s) => `
-        <article class="card${s.featured ? ' is-featured' : ''}">
-          <img class="card-art" src="${s.art}" alt="" width="200" height="156" />
+const cards = services.map((s, i) => `
+        <article class="card card--${s.kind}">
+          <div class="card-top">
+            <span class="card-num">${String(i + 1).padStart(2, '0')}</span>
+            <a class="card-go" href="${whatsapp(`Hi Stretford Labs, I'd like to know more about ${s.title.replace('&amp;', '&')}.`)}" target="_blank" rel="noopener noreferrer" aria-label="Ask about ${s.title}">${svg(glyph.arrow)}</a>
+          </div>
+          <span class="card-icon">${svg(s.icon)}</span>
           <h3>${s.title}</h3>
           <p>${s.copy}</p>
+          <div class="card-visual" aria-hidden="true">${s.visual}
+          </div>
         </article>`).join('')
 
 document.querySelector('#app').innerHTML = `
