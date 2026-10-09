@@ -8,6 +8,7 @@ import artMindlap from './assets/work-mindlap.webp'
 import artStretford from './assets/work-stretford.webp'
 import aboutArt from './assets/about-art.webp'
 import contactArt from './assets/contact-art.webp'
+import logo from './assets/logo.webp'
 
 const WHATSAPP_NUMBER = '919292016359'
 const whatsapp = (message) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
@@ -93,11 +94,11 @@ const projectCards = projects.map((p) => `
         </article>`).join('')
 
 const steps = [
-  { title: 'Understand', lines: ['We map your sales,', 'operations and data to', 'find what slows you down.'] },
-  { title: 'Plan', lines: ['We design the right', 'Zoho stack, modules and', 'automations you need.'] },
-  { title: 'Build &amp; Configure', lines: ['We customize Zoho, write', 'Deluge functions and', 'connect your other tools.'] },
-  { title: 'Test &amp; Go Live', lines: ['We test every workflow,', 'migrate your data and', 'train your team.'] },
-  { title: 'Grow Together', lines: ['We stay with you, optimize,', 'support your growth and', 'scale Zoho as you grow.'] },
+  { title: 'Discover', lines: ['We run workshops to map', 'your sales, operations,', 'data and pain points.'], deliverable: 'Process map' },
+  { title: 'Design', lines: ['We plan which Zoho app', 'owns what and how data', 'flows between them.'], deliverable: 'Solution blueprint' },
+  { title: 'Build &amp; Integrate', lines: ['We configure Zoho, write', 'Deluge and connect CRM,', 'Books, payments &amp; WhatsApp.'], deliverable: 'Working system' },
+  { title: 'Test &amp; Go Live', lines: ['We test every failure', 'path, migrate your data', 'and train your team.'], deliverable: 'Go-live sign-off' },
+  { title: 'Support &amp; Grow', lines: ['We monitor, fix and add', 'features as your', 'business grows.'], deliverable: 'Ongoing support' },
 ]
 
 const stepItems = steps.map((s, i) => `
@@ -106,6 +107,7 @@ const stepItems = steps.map((s, i) => `
             <div>
               <h3>${s.title}</h3>
               <p>${s.lines.join('<br class="step-br" /> ')}</p>
+              <span class="step-out"><span class="step-out-label">You get</span> ${s.deliverable}</span>
             </div>
           </li>`).join('')
 
@@ -121,8 +123,7 @@ document.querySelector('#app').innerHTML = `
     <div class="hero-section">
       <header class="nav" aria-label="Primary navigation">
         <a class="brand" href="#top" aria-label="Stretford Labs home">
-          <span class="brand-word">Stret<em>ford</em></span>
-          <span class="brand-sub">LABS</span>
+          <img class="brand-logo" src="${logo}" alt="Stretford Labs" width="900" height="257" />
         </a>
         <nav class="nav-links">
           <a class="is-active" href="#top">Home</a>
@@ -140,7 +141,7 @@ document.querySelector('#app').innerHTML = `
           <p class="intro">We customize, build and integrate Zoho apps for businesses that want CRM, workflows and data that just work.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${whatsapp("Hi Stretford Labs, I'd like help with a Zoho project.")}" target="_blank" rel="noopener noreferrer">Start a project <span aria-hidden="true">&rarr;</span></a>
-            <a class="btn btn-ghost" href="#work">See our work</a>
+            <a class="btn btn-ghost" href="#assessment">Free assessment</a>
           </div>
           <div class="stats">
             <div class="stat"><strong>20<span>+</span></strong><small>Projects Delivered</small></div>
@@ -190,9 +191,9 @@ document.querySelector('#app').innerHTML = `
       <div class="about-stage">
         <img class="about-art" src="${aboutArt}" alt="Illustrated journey of a designer: an idea, planning, building, launching and growing a brand" loading="lazy" />
         <header class="about-head">
-          <p class="about-eyebrow">Our Process</p>
-          <h2 id="about-title">Ideas today<br />A bigger <em>tomorrow</em></h2>
-          <p class="about-sub">We turn your <strong>processes into connected</strong> Zoho systems that create real business impact.</p>
+          <p class="about-eyebrow">How we build</p>
+          <h2 id="about-title">From first call<br />to <em>go-live</em></h2>
+          <p class="about-sub">Five clear stages, a <strong>deliverable at each one</strong>, and every failure path tested before launch.</p>
         </header>
       </div>
 
@@ -220,8 +221,7 @@ document.querySelector('#app').innerHTML = `
 
       <footer class="site-foot">
         <a class="foot-brand" href="#top" aria-label="Stretford Labs, back to top">
-          <span class="brand-word">Stret<em>ford</em></span>
-          <span class="brand-sub">LABS</span>
+          <img class="brand-logo" src="${logo}" alt="Stretford Labs" width="900" height="257" />
         </a>
         <i class="foot-rule"></i>
         <i class="foot-dash"></i>
@@ -239,7 +239,183 @@ document.querySelector('#app').innerHTML = `
       <span class="dock-text"><strong>Chat With Us</strong><small>${WHATSAPP_DISPLAY}</small></span>
     </a>
   </nav>
+
+  <dialog class="quiz" id="assessment" aria-labelledby="quiz-title">
+    <div class="quiz-panel">
+      <div class="quiz-top">
+        <p class="quiz-eyebrow">Free self-assessment</p>
+        <button class="quiz-close" type="button" aria-label="Close assessment">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+      <h2 class="quiz-title" id="quiz-title">How much could Zoho do for your business?</h2>
+      <div class="quiz-progress" aria-hidden="true"><i></i></div>
+      <div class="quiz-body" aria-live="polite"></div>
+    </div>
+  </dialog>
 `
+
+// Self-assessment: one question per screen, then a score, suggested services and a WhatsApp hand-off
+// carrying every answer. Options with a number add to the opportunity score (higher = more to gain).
+const quiz = [
+  { key: 'Industry', q: 'What kind of business do you run?', options: ['Retail / E-commerce', 'Professional services', 'Healthcare / Clinic', 'Real estate', 'Manufacturing / Distribution', 'Education / Training', 'Something else'] },
+  { key: 'Team size', q: 'How big is your team?', options: ['Just me', '2 – 10 people', '11 – 50 people', '50+ people'] },
+  { key: 'Leads tracked in', q: 'Where do you keep track of leads and customers today?', options: [['Notebooks, WhatsApp or memory', 3], ['Excel or Google Sheets', 3], ['A CRM that doesn’t quite fit', 2], ['A CRM that works well', 0]] },
+  { key: 'Zoho today', q: 'Are you using Zoho already?', options: [['Not yet', 2], ['Yes, a few Zoho apps', 1], ['Yes, but it isn’t set up well', 3], ['Yes, Zoho One across the team', 1]] },
+  { key: 'Manual work', q: 'How much of your team’s day goes into repetitive manual work?', options: [['Most of it', 3], ['A good chunk', 2], ['Some', 1], ['Hardly any', 0]] },
+  { key: 'Connected tools', q: 'Do your tools share data with each other?', options: [['No, we copy data between them by hand', 3], ['A few are connected', 2], ['Mostly, with some gaps', 1], ['Yes, everything stays in sync', 0]] },
+  { key: 'Reporting', q: 'How quickly can you see your sales and operations numbers?', options: [['It takes days to put together', 3], ['A few hours of work', 2], ['We have dashboards, but they’re incomplete', 1], ['Live, any time we want', 0]] },
+  { key: 'Main goal', q: 'What would help your business most right now?', options: ['Closing more sales', 'Automating daily operations', 'Clearer reports and dashboards', 'Moving everything to Zoho', 'A custom app for our process'] },
+  { key: 'Timeline', q: 'When would you like to get started?', options: ['As soon as possible', 'Within 1 – 3 months', 'Just exploring for now'] },
+].map((item) => ({ ...item, options: item.options.map((o) => (Array.isArray(o) ? { label: o[0], points: o[1] } : { label: o, points: 0 })) }))
+
+const maxScore = quiz.reduce((sum, item) => sum + Math.max(...item.options.map((o) => o.points)), 0)
+
+const tiers = [
+  { min: 67, name: 'High-impact opportunity', copy: 'Your team is losing real hours to manual work and disconnected tools. A well-built Zoho setup could change how your business runs day to day.' },
+  { min: 34, name: 'Ready to level up', copy: 'You have the basics in place, but there are clear gaps where Zoho automation and integrations would save time and help you win more deals.' },
+  { min: 0, name: 'Well-oiled, room to fine-tune', copy: 'Your systems are in good shape. Targeted Zoho customizations and sharper reporting can still free up time and show you more.' },
+]
+
+const quizEl = document.querySelector('.quiz')
+const quizBody = quizEl.querySelector('.quiz-body')
+const quizBar = quizEl.querySelector('.quiz-progress i')
+const quizTitle = quizEl.querySelector('.quiz-title')
+let answers = []
+let current = 0
+
+const pick = (key) => {
+  const i = quiz.findIndex((item) => item.key === key)
+  return quiz[i].options[answers[i]]
+}
+
+function suggestions() {
+  const found = []
+  const add = (name, why) => { if (!found.some((f) => f.name === name)) found.push({ name, why }) }
+  const goal = pick('Main goal').label
+  if (goal === 'A custom app for our process') add('Zoho Creator Apps', 'A custom app built around exactly how your team works.')
+  if (pick('Leads tracked in').points >= 2 || goal === 'Closing more sales') add('Zoho CRM Setup', 'Every lead and customer in one CRM shaped around how you sell.')
+  if (pick('Zoho today').points === 3 || goal === 'Moving everything to Zoho') add('Zoho One Consulting', 'A clean setup or migration so Zoho fits your business from day one.')
+  if (pick('Manual work').points >= 2 || goal === 'Automating daily operations') add('Workflow Automation', 'Deluge functions and workflows that take repetitive tasks off your team.')
+  if (pick('Connected tools').points >= 2) add('Integrations &amp; APIs', 'Connect Zoho to payments, WhatsApp, your website and other tools.')
+  if (pick('Reporting').points >= 2 || goal === 'Clearer reports and dashboards') add('Zoho Analytics Dashboards', 'Live numbers for sales and operations, without the spreadsheet work.')
+  if (!found.length) add('Zoho One Consulting', 'An audit of your current setup to find the next quick wins.')
+  return found.slice(0, 3)
+}
+
+function renderQuestion() {
+  const item = quiz[current]
+  quizTitle.hidden = current > 0
+  quizBar.style.width = `${(current / quiz.length) * 100}%`
+  quizBody.innerHTML = `
+    <div class="quiz-step">
+      <p class="quiz-count">Question ${current + 1} of ${quiz.length}</p>
+      <h3 class="quiz-q" tabindex="-1">${item.q}</h3>
+      <ul class="quiz-options">${item.options.map((o, i) => `
+        <li><button type="button" class="quiz-option${answers[current] === i ? ' is-picked' : ''}" data-i="${i}">${o.label}</button></li>`).join('')}
+      </ul>
+      ${current > 0 ? '<button type="button" class="quiz-back"><span aria-hidden="true">&larr;</span> Back</button>' : ''}
+    </div>`
+  quizBody.querySelector('.quiz-q').focus({ preventScroll: true })
+}
+
+function renderResult() {
+  const score = Math.round((answers.reduce((sum, a, i) => sum + quiz[i].options[a].points, 0) / maxScore) * 100)
+  const tier = tiers.find((t) => score >= t.min)
+  const recs = suggestions()
+  quizTitle.hidden = true
+  quizBar.style.width = '100%'
+  quizBody.innerHTML = `
+    <div class="quiz-step quiz-result">
+      <p class="quiz-count">Your result</p>
+      <div class="quiz-score">
+        <strong tabindex="-1">${score}<small>/100</small></strong>
+        <span>Zoho opportunity score</span>
+      </div>
+      <div class="quiz-meter" aria-hidden="true"><i style="width:${score}%"></i></div>
+      <h3 class="quiz-tier">${tier.name}</h3>
+      <p class="quiz-copy">${tier.copy}</p>
+      <p class="quiz-label">Where we&rsquo;d start</p>
+      <ul class="quiz-recs">${recs.map((r) => `
+        <li><strong>${r.name}</strong><span>${r.why}</span></li>`).join('')}
+      </ul>
+      <form class="quiz-send">
+        <div class="quiz-fields">
+          <label>Your name<input name="name" autocomplete="name" placeholder="Optional" /></label>
+          <label>Business name<input name="business" autocomplete="organization" placeholder="Optional" /></label>
+        </div>
+        <button class="btn btn-primary quiz-wa" type="submit"><span class="quiz-wa-icon">${icons.whatsapp}</span>Send my results on WhatsApp</button>
+        <button type="button" class="quiz-back quiz-restart">Retake the assessment</button>
+      </form>
+    </div>`
+  quizBody.querySelector('.quiz-score strong').focus({ preventScroll: true })
+
+  quizBody.querySelector('.quiz-send').addEventListener('submit', (event) => {
+    event.preventDefault()
+    const form = new FormData(event.target)
+    const name = form.get('name').trim()
+    const business = form.get('business').trim()
+    const lines = [
+      'Hi Stretford Labs, I just took the Zoho self-assessment on your website.',
+      '',
+      ...(name ? [`Name: ${name}`] : []),
+      ...(business ? [`Business: ${business}`] : []),
+      ...quiz.map((item, i) => `${item.key}: ${item.options[answers[i]].label}`),
+      '',
+      `Score: ${score}/100 (${tier.name})`,
+      `Suggested: ${recs.map((r) => r.name.replace('&amp;', '&')).join(', ')}`,
+      '',
+      'I’d like to talk about next steps.',
+    ]
+    window.open(whatsapp(lines.join('\n')), '_blank', 'noopener')
+  })
+}
+
+quizBody.addEventListener('click', (event) => {
+  const option = event.target.closest('.quiz-option')
+  if (option) {
+    if (quizBody.classList.contains('is-moving')) return
+    answers[current] = Number(option.dataset.i)
+    quizBody.querySelectorAll('.quiz-option').forEach((o) => o.classList.toggle('is-picked', o === option))
+    quizBody.classList.add('is-moving')
+    setTimeout(() => {
+      quizBody.classList.remove('is-moving')
+      current += 1
+      if (current < quiz.length) renderQuestion()
+      else renderResult()
+    }, 180)
+  } else if (event.target.closest('.quiz-restart')) {
+    answers = []
+    current = 0
+    renderQuestion()
+  } else if (event.target.closest('.quiz-back')) {
+    current -= 1
+    renderQuestion()
+  }
+})
+
+function openQuiz() {
+  if (quizEl.open) return
+  if (current >= quiz.length) {
+    answers = []
+    current = 0
+  }
+  document.documentElement.classList.add('quiz-open')
+  quizEl.showModal()
+  renderQuestion()
+}
+
+quizEl.addEventListener('close', () => {
+  document.documentElement.classList.remove('quiz-open')
+  if (location.hash === '#assessment') history.replaceState(null, '', location.pathname + location.search)
+})
+quizEl.querySelector('.quiz-close').addEventListener('click', () => quizEl.close())
+quizEl.addEventListener('click', (event) => {
+  if (event.target === quizEl) quizEl.close()
+})
+const openFromHash = () => { if (location.hash === '#assessment') openQuiz() }
+window.addEventListener('hashchange', openFromHash)
+openFromHash()
 
 // On landscape desktops every section fills exactly one screen: each is laid out on a canvas at its
 // comp's scale (width x height below) and zoomed to fit. The canvas grows along whichever axis the
@@ -248,7 +424,7 @@ const FIT_SECTIONS = [
   ['.hero-section', 1672, 941],
   ['.services', 1672, 941],
   ['.work', 1536, 935],
-  ['.about', 1717, 806, { w: 1717, h: 715, below: 91 }],
+  ['.about', 1717, 845, { w: 1717, h: 715, below: 130 }],
   ['.contact', 1717, 916, { w: 1717, h: 806, below: 110 }],
 ]
 
@@ -289,6 +465,7 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
     const target = document.querySelector(link.getAttribute('href'))
     if (!target) return
     event.preventDefault()
+    if (target === quizEl) return openQuiz()
     target.scrollIntoView({ behavior: 'smooth' })
   })
 })
