@@ -11,7 +11,7 @@ const whatsapp = (message) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURI
 const INSTAGRAM_URL = 'https://www.instagram.com/stretford_labs/'
 const INSTAGRAM_HANDLE = '@stretford_labs'
 const WHATSAPP_DISPLAY = '+91 92920 16359'
-const LINKEDIN_URL = '' // not supplied yet: the item renders without a link until this is set
+const LINKEDIN_URL = 'https://www.linkedin.com/company/stretford-labs/'
 const EMAIL = 'stretfordlabs@gmail.com'
 
 const icons = {
