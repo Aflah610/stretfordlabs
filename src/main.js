@@ -39,24 +39,24 @@ const contactItems = contactLinks.map(({ icon, label, href }) => {
 const services = [
   {
     art: iconWebDesign,
-    title: 'Web Design',
-    copy: 'Clean, modern and intentional designs that make your brand stand out.',
+    title: 'Zoho CRM Setup',
+    copy: 'Modules, layouts, blueprints and workflows shaped around how you sell.',
   },
   {
     art: iconFrontend,
-    title: 'Frontend Development',
-    copy: 'Fast, responsive and pixel-perfect websites built with modern technologies.',
+    title: 'Zoho Creator Apps',
+    copy: 'Custom low-code apps and Deluge scripts for processes no off-the-shelf tool fits.',
     featured: true,
   },
   {
     art: iconLanding,
-    title: 'Landing Pages',
-    copy: 'High-converting landing pages for products, campaigns and ideas.',
+    title: 'Integrations &amp; APIs',
+    copy: 'Connect Zoho to payments, WhatsApp, your website and the tools you already use.',
   },
   {
     art: iconUiux,
-    title: 'UI/UX Consulting',
-    copy: 'Strategic design solutions to improve user experience and business results.',
+    title: 'Zoho One Consulting',
+    copy: 'Implementation, data migration and audits to get the most out of Zoho One.',
   },
 ]
 
@@ -93,11 +93,11 @@ const projectCards = projects.map((p) => `
         </article>`).join('')
 
 const steps = [
-  { title: 'Understand', lines: ['We listen, learn and', 'understand your goals,', 'challenges and ideas.'] },
-  { title: 'Plan', lines: ['We create a clear', 'strategy and the right', 'solution for your business.'] },
-  { title: 'Design &amp; Develop', lines: ['We design clean, modern', 'and high-performing', 'websites and applications.'] },
-  { title: 'Test &amp; Launch', lines: ['We test everything', 'thoroughly and launch', 'with confidence.'] },
-  { title: 'Grow Together', lines: ['We stay with you, optimize,', 'support your growth and', 'help you reach the next level.'] },
+  { title: 'Understand', lines: ['We map your sales,', 'operations and data to', 'find what slows you down.'] },
+  { title: 'Plan', lines: ['We design the right', 'Zoho stack, modules and', 'automations you need.'] },
+  { title: 'Build &amp; Configure', lines: ['We customize Zoho, write', 'Deluge functions and', 'connect your other tools.'] },
+  { title: 'Test &amp; Go Live', lines: ['We test every workflow,', 'migrate your data and', 'train your team.'] },
+  { title: 'Grow Together', lines: ['We stay with you, optimize,', 'support your growth and', 'scale Zoho as you grow.'] },
 ]
 
 const stepItems = steps.map((s, i) => `
@@ -131,15 +131,15 @@ document.querySelector('#app').innerHTML = `
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
-        <a class="nav-cta" href="${whatsapp("Hi Stretford Labs, I'd like to start a project.")}" target="_blank" rel="noopener noreferrer">Start a project <span aria-hidden="true">&rarr;</span></a>
+        <a class="nav-cta" href="${whatsapp("Hi Stretford Labs, I'd like help with a Zoho project.")}" target="_blank" rel="noopener noreferrer">Start a project <span aria-hidden="true">&rarr;</span></a>
       </header>
 
       <main class="hero" id="top">
         <div class="hero-copy">
-          <h1>Websites that<br /><em>Speak</em> for you</h1>
-          <p class="intro">We design and develop modern websites for businesses, brands, and people who want to stand out online.</p>
+          <h1>Zoho that<br /><em>Works</em> for you</h1>
+          <p class="intro">We customize, build and integrate Zoho apps for businesses that want CRM, workflows and data that just work.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="${whatsapp("Hi Stretford Labs, I'd like to start a project.")}" target="_blank" rel="noopener noreferrer">Start a project <span aria-hidden="true">&rarr;</span></a>
+            <a class="btn btn-primary" href="${whatsapp("Hi Stretford Labs, I'd like help with a Zoho project.")}" target="_blank" rel="noopener noreferrer">Start a project <span aria-hidden="true">&rarr;</span></a>
             <a class="btn btn-ghost" href="#work">See our work</a>
           </div>
           <div class="stats">
@@ -158,9 +158,9 @@ document.querySelector('#app').innerHTML = `
         <header class="services-head">
           <div class="services-head-copy">
             <p class="eyebrow-xs">Our Services</p>
-            <h2 id="services-title">Everything you need<br />to build <em>online</em></h2>
+            <h2 id="services-title">Everything you need<br />to run on <em>Zoho</em></h2>
           </div>
-          <p class="services-lead">We design and develop digital solutions that help businesses grow, look better, and perform stronger.</p>
+          <p class="services-lead">We set up, customize and extend Zoho so your teams sell faster, work smarter, and stay in sync.</p>
           <a class="btn btn-outline" href="${whatsapp("Hi Stretford Labs, I'd like to get in touch.")}" target="_blank" rel="noopener noreferrer">Contact us <span aria-hidden="true">&rarr;</span></a>
         </header>
 
@@ -175,9 +175,9 @@ document.querySelector('#app').innerHTML = `
           <div class="work-head-copy">
             <p class="eyebrow-xs">Our Work</p>
             <h2 id="work-title">Ideas into<br /><em>real</em> experiences</h2>
-            <p class="work-sub">A collection of websites we&rsquo;ve designed and developed for brands, businesses, and bold ideas.</p>
+            <p class="work-sub">A collection of Zoho solutions and websites we&rsquo;ve built for brands, businesses, and bold ideas.</p>
           </div>
-          <p class="work-lead">We turn ideas into modern, functional digital experiences that help businesses grow and stand out.</p>
+          <p class="work-lead">We turn business processes into connected Zoho systems and modern, functional digital experiences.</p>
           <a class="btn btn-outline work-all" href="#work">All projects <span aria-hidden="true">&rarr;</span></a>
         </header>
 
@@ -192,7 +192,7 @@ document.querySelector('#app').innerHTML = `
         <header class="about-head">
           <p class="about-eyebrow">Our Process</p>
           <h2 id="about-title">Ideas today<br />A bigger <em>tomorrow</em></h2>
-          <p class="about-sub">We turn your <strong>ideas into modern</strong> digital solutions that create real business impact.</p>
+          <p class="about-sub">We turn your <strong>processes into connected</strong> Zoho systems that create real business impact.</p>
         </header>
       </div>
 
@@ -208,9 +208,9 @@ document.querySelector('#app').innerHTML = `
         <div class="contact-head">
           <p class="contact-eyebrow">Let&rsquo;s build together</p>
           <h2 id="contact-title">Ready to build<br /><em>what&rsquo;s next?</em></h2>
-          <p class="contact-sub">Share your ideas. We&rsquo;ll handle the rest and<br class="contact-br" /> turn them into real results.</p>
+          <p class="contact-sub">Share your workflow. We&rsquo;ll build it in Zoho and<br class="contact-br" /> turn it into real results.</p>
           <div class="contact-actions">
-            <a class="btn btn-primary contact-start" href="${whatsapp("Hi Stretford Labs, I'd like to start a project.")}" target="_blank" rel="noopener noreferrer">Start a project <span aria-hidden="true">&rarr;</span></a>
+            <a class="btn btn-primary contact-start" href="${whatsapp("Hi Stretford Labs, I'd like help with a Zoho project.")}" target="_blank" rel="noopener noreferrer">Start a project <span aria-hidden="true">&rarr;</span></a>
             <a class="btn contact-talk" href="${whatsapp("Hi Stretford Labs, let's talk.")}" target="_blank" rel="noopener noreferrer">Let&rsquo;s talk</a>
           </div>
           <ul class="contact-links">${contactItems}
